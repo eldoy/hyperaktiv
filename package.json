@@ -1,6 +1,6 @@
 {
 	"name": "hyperaktiv",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Reactive data structures based on proxies",
 	"main": "index.js",
 	"scripts": {
