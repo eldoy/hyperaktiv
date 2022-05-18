@@ -1,15 +1,13 @@
+/* Data **
+***********************/
+
 const computedStack = []
 const observersMap = new WeakMap()
 const computedDependenciesTracker = new WeakMap()
 
-const BIND_IGNORED = [
-  'String',
-  'Number',
-  'Object',
-  'Array',
-  'Boolean',
-  'Date'
-]
+
+/* Utility functions **
+***********************/
 
 function isObj(object) {
   return object && typeof object === 'object'
@@ -28,6 +26,15 @@ function defineBubblingProperties(object, key, parent) {
   setHiddenKey(object, '__parent', parent)
 }
 
+const BIND_IGNORED = [
+  'String',
+  'Number',
+  'Object',
+  'Array',
+  'Boolean',
+  'Date'
+]
+
 function getInstanceMethodKeys(object) {
   return (
     Object
@@ -40,6 +47,10 @@ function getInstanceMethodKeys(object) {
     .filter(prop => prop !== 'constructor' && typeof object[prop] === 'function')
   )
 }
+
+
+/* Observe **
+***********************/
 
 let timeout = null
 const queue = new Set()
@@ -86,12 +97,7 @@ function observe(obj, options = {}) {
       !(typeof ignore === 'function' && ignore(prop, value))
     )
 
-
   // Add the object to the observers map.
-  // observersMap signature : Map<Object, Map<Property, Set<Computed function>>>
-  // In other words, observersMap is a map of observed objects.
-  // For each observed object, each property is mapped with a set of computed functions depending on this property.
-  // Whenever a property is set, we re-run each one of the functions stored inside the matching Set.
   observersMap.set(obj, new Map())
 
   // If the deep flag is set, observe nested objects/arrays
@@ -209,6 +215,10 @@ function observe(obj, options = {}) {
   return proxy
 }
 
+
+/* Computed **
+***********************/
+
 function computed(wrappedFunction, {
   autoRun = true,
   callback,
@@ -254,11 +264,14 @@ function computed(wrappedFunction, {
   return proxy
 }
 
+
+/* Dispose **
+***********************/
+
 function dispose(computedFunction) {
   computedDependenciesTracker.delete(computedFunction)
   return computedFunction.__disposed = true
 }
-
 
 module.exports = {
   observe,
