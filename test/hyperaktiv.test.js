@@ -1,9 +1,8 @@
-const hyperactiv = require('../lib/index')
 const {
   computed,
   observe,
   dispose
-} = hyperactiv
+} = require('../index.js')
 
 const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
