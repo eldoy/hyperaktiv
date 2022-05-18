@@ -4,9 +4,13 @@
 	"description": "Reactive data structures based on proxies",
 	"main": "index.js",
 	"scripts": {
-		"test": "jest --watch"
+		"test": "jest --watch",
+		"build": "node scripts/build.js"
 	},
 	"dependencies": {
 		"jest": "^28.1.0"
+	},
+	"devDependencies": {
+		"uglify-js": "^3.15.5"
 	}
 }
