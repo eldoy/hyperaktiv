@@ -1,0 +1,12 @@
+{
+	"name": "hyperaktiv",
+	"version": "0.1.0",
+	"description": "Reactive data structures based on proxies",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest --watch"
+	},
+	"dependencies": {
+		"jest": "^28.1.0"
+	}
+}
